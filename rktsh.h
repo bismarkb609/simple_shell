@@ -39,6 +39,7 @@ int _atoi(char *s);
 char *_strdup(char *str);
 char *_strcat(char *dest, char *src);
 unsigned int word_count(char *str);
+int _getchar(void);
 
 
 char *_read_line(void);
@@ -46,8 +47,8 @@ char *_sptok(char *s, char *delim);
 char **_split_line(char *line);
 int _execute(char **args);
 int _launch(char **args);
+char *_which(char *command, char *fullpath, char *path);
 
-void _ls(char *path);
 char *_getenv(const char *name);
 char **copy_env(char **environ_copy, unsigned int environ_length);
 void free_dp(char **array, unsigned int length);

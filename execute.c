@@ -17,7 +17,7 @@ return (1);
 
 for (i = 0; i < _num_builtins(); i++)
 {
-if (strcmp(args[0], builtin_str[i]) == 0)
+if (_strcmp(args[0], builtin_str[i], _strlen(args[0])) == 0)
 {
 return ((*builtin_func[i])(args));
 }
@@ -38,12 +38,17 @@ int _launch(char **args)
 pid_t pid;
 int status;
 
+char *path;
+char *fullpath;
+
 pid = fork();
 if (pid == 0)
 {
 /* Child process */
+path = _getenv("PATH");
+fullpath = _which(args[0], path, path);
 
-if (execvp(args[0], args) == -1)
+if (execve(fullpath, args, NULL) == -1)
 {
 perror("rktsh");
 }

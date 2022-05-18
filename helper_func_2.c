@@ -133,23 +133,28 @@ flag = 0;
 return (wc);
 }
 
-/**
- * _ls - list directory content
- * @path: path to directory
- */
-void _ls(char *path)
-{
-DIR *mydir;
-struct dirent *myfile;
-struct stat mystat;
 
-mydir = opendir(path);
-while ((myfile = readdir(mydir)) != NULL)
+
+/**
+ * _getchar - Read a line of input from stdin.
+ * Return: character from stdin.
+ */
+int _getchar(void)
 {
-stat(myfile->d_name, &mystat);
-printf("%lld", mystat.st_size);
-printf(" %s\n", myfile->d_name);
+static char buf[BUFSIZ];
+static char *bufp = buf;
+static int i;
+i = 0;
+
+if (i == 0)
+{
+i = read(0, buf, 1);
+bufp = buf;
 }
-closedir(mydir);
+if (--i >= 0)
+{
+return  (*bufp++);
+}
+return (EOF);
 }
 

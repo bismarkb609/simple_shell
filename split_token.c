@@ -19,7 +19,7 @@ if ((s == NULL) && (rem == NULL))
 return (NULL);
 if (s == NULL)
 s = rem;
-s_length = strlen(s) + 1;
+s_length = _strlen(s) + 1;
 for (i = 0; i < s_length; i++)
 {
 if (s[i] == delim[0])

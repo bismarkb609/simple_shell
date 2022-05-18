@@ -10,7 +10,7 @@ char **args;
 int status;
 
 do {
-printf(RKTSH_PROMPT);
+write(STDOUT_FILENO, RKTSH_PROMPT, _strlen(RKTSH_PROMPT));
 line = _read_line();
 args = _split_line(line);
 status = _execute(args);

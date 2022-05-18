@@ -14,13 +14,12 @@ int c;
 
 if (!buffer)
 {
-fprintf(stderr, "rktsh: allocation error\n");
+write(STDERR_FILENO, "rktsh: allocation error\n", 25);
 exit(EXIT_FAILURE);
 }
 while (1)
 {
-
-c = getchar();
+c = _getchar();
 if (c == EOF)
 {
 exit(EXIT_SUCCESS);
@@ -42,9 +41,10 @@ bufsize += RKTSH_RL_BUFSIZE;
 buffer = realloc(buffer, bufsize);
 if (!buffer)
 {
-fprintf(stderr, "rktsh: allocation error\n");
+write(STDERR_FILENO, "rktsh: allocation error\n", 25);
 exit(EXIT_FAILURE);
 }
 }
 }
 }
+

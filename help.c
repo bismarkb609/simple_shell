@@ -11,18 +11,20 @@ int i;
 
 if (args[2] == NULL)
 {
-fprintf(stderr, "rktsh: expected no argument to \"help\"\n");
+write(STDERR_FILENO, "rktsh: expected no argument to \"help\"\n", 39);
 }
 
-printf("RocKeT SHell - RKTSH\n");
-printf("Type program names and arguments, and hit enter.\n");
-printf("The following are built in:\n");
+write(STDOUT_FILENO, "RocKeT SHell - RKTSH\n", 22);
+write(STDOUT_FILENO, "Type program names and arguments, and hit enter.\n", 50);
+write(STDOUT_FILENO, "The following are built in:\n", 29);
 
 for (i = 0; i < _num_builtins(); i++)
 {
-printf("  %s\n", builtin_str[i]);
+write(STDOUT_FILENO, builtin_str[i], _strlen(builtin_str[i]));
+write(STDOUT_FILENO, "\n", 2);
 }
 
-printf("Use the man command for information on other programs.\n");
+write(STDOUT_FILENO, "\n", 2);
+write(1, "Use the man command for information on other programs.\n\n", 57);
 return (1);
 }

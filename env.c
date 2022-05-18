@@ -19,9 +19,10 @@ return (1);
 while (environ[i] != NULL)
 {
 write(STDOUT_FILENO, environ[i], _strlen(environ[i]));
-write(STDOUT_FILENO, "\n", 1);
+write(STDOUT_FILENO, "\n", 2);
+
 i++;
 }
-
+write(STDOUT_FILENO, "\n", 2);
 return (1);
 }
