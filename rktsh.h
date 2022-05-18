@@ -20,7 +20,7 @@
 #define RKTSH_DICT_LEN 256
 
 /* prompt string */
-#define RKTSH_PROMPT "🚀►► "
+#define RKTSH_PROMPT "$ "
 #define SH_PROMPT "🚀►► "
 
 /* error strings */
