@@ -1,69 +1,40 @@
-#include "commands.h"
-#include "general.h"
-#include "memory.h"
+#include "execute.h"
 
 /**
  * execute - Execute a command in other process
- *
- * @command: Command to execute
- * @arguments: Arguments of the @command
- * @info: General info about the shell
- * @buff: Line readed
- **/
-void execute(char *command, char **arguments, general_t *info, char *buff)
-{
-	int status;
-	pid_t pid;
-
-	pid = fork();
-	if (pid == 0)
-	{
-		execve(command, arguments, environ);
-		perror("./sh");
-
-		free_memory_pp((void *) arguments);
-
-		if (info->value_path != NULL)
-		{
-			free(info->value_path);
-			info->value_path = NULL;
-		}
-
-		free(info);
-		free(buff);
-		exit(1);
-	}
-	else if (pid > 0)
-	{
-		waitpid(pid, &status, 0);
-		if (WIFEXITED(status))
-			info->status_code = WEXITSTATUS(status);
-	}
-}
-
-
-/**
- * current_directory - Execute the command if the order require
- *
  * @cmd: Command to execute
- * @arguments: Arguments of the @cmd
- * @buff: Line readed
+ * @args: Arguments of the @command
  * @info: General info about the shell
- *
- * Return: Status of the operations
+ * @buff: Line readed
  **/
-int current_directory(char *cmd, char **arguments, char *buff, general_t *info)
+void execute(info_t *info, char *cmd, char **args, char *buff)
 {
+int status;
+pid_t pid;
 
-	if (info->is_current_path == _FALSE)
-		return (_FALSE);
+pid = fork();
+if (pid == 0)
+{
+execve(cmd, args, environ);
+perror("./sh");
 
-	if (is_executable(cmd) == PERMISSIONS)
-	{
-		execute(cmd, arguments, info, buff);
-		return (_TRUE);
-	}
+free_pp((void *) args);
 
-	return (_FALSE);
+if (info->value_path != NULL)
+{
+free(info->value_path);
+info->value_path = NULL;
 }
 
+free(info);
+free(buff);
+exit(1);
+
+}
+else if (pid > 0)
+{
+waitpid(pid, &status, 0);
+if (WIFEXITED(status))
+info->status_code = WEXITSTATUS(status);
+}
+}

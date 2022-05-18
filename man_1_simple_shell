@@ -35,13 +35,13 @@ Determine the pathname of the user's home directory.
 .br
 *LANG
 Provide a default value for the internationalization variables that are unset or null.
-.br 
+.br
 *PATH
-Establish a string formatted 
+Establish a string formatted
 .br
 .IP *PWD
 This variable shall represent an absolute pathname of the current working directory. Assignments to this variable may be ignored.
- 
+
 
 .SH ASYNCHRONOUS EVENTS
  The sh utility shall take the standard action for all signals. If the shell is interactive, SIGINT signals received during command line editing shall be handled as described in the EXTENDED DESCRIPTION, and SIGINT signals received at other times shall be caught but no action performed.
@@ -62,7 +62,7 @@ k_shell can be executed int two modes:
 .br ./hsh
 
 .B *Non interactive mode:
-.br echo "/bin/ls" | ./hsh 
+.br echo "/bin/ls" | ./hsh
 
 .SH EXAMPLES
 .B 1. Non interactice mode example:
@@ -90,8 +90,8 @@ $
 None
 
 .SH SEE ALSO
-acces(2), chdir(2), close (2), closedir(2), execve(2), exit(3), _exit(2), fflush(3), fork(2), free(3), getcwd(3), getline(3) 
-isatty(3), kill(2), malloc(3), open(2), opendir(3), perror(3), read(2), readdir(3), signal(2), stat(2), lstat(2), fstat(2) 
+acces(2), chdir(2), close (2), closedir(2), execve(2), exit(3), _exit(2), fflush(3), fork(2), free(3), getcwd(3), getline(3)
+isatty(3), kill(2), malloc(3), open(2), opendir(3), perror(3), read(2), readdir(3), signal(2), stat(2), lstat(2), fstat(2)
 strtok(3), wait(2), waitpid(2), wait3(2), wait4(2), write(2).
 
 .SH COPYRIGHT

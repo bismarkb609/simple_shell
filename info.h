@@ -1,5 +1,5 @@
-#ifndef GENERAL_H
-#define GENERAL_H
+#ifndef INFO_H
+#define INFO_H
 
 #define _TRUE            1
 #define _FALSE           0
@@ -16,6 +16,8 @@
 
 #define _FILE            10
 #define NON_FILE         -10
+
+#define SH_PROMPT "🚀►► "
 
 #define _ENOENT          "No such file or directory"
 #define _EACCES          "Permission denied"
@@ -41,7 +43,7 @@ typedef struct __attribute__((__packed__))
 	char **arguments;         /* Line splited into words */
 	char *environment;        /* Last environment variable get it */
 	int pid;                  /* Process id */
-} general_t;
+} info_t;
 
 typedef struct __attribute__((__packed__))
 {
@@ -52,8 +54,8 @@ typedef struct __attribute__((__packed__))
 typedef struct __attribute__((__packed__))
 {
 	char *command;            /* arguments[0] = cmd */
-	void (*func)(general_t *info, char **arguments);
+	void (*func)(info_t *info, char **arguments);
 } builtin_t;
 
-#endif /* GENERAL_H */
+#endif /* INFO_H */
 

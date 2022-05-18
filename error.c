@@ -1,30 +1,27 @@
 #include "error.h"
-#include "general.h"
-#include "text.h"
+
 
 /**
- * message_selector - Select the message that match with the error_code
- *
+ * msg_selector - Select the message that match with the error_code
  * @info: General information about the shell
- *
  * Return: Error message
  **/
-char *message_selector(general_t info)
+char *msg_selector(info_t info)
 {
-	int i, n_options;
-	error_t messages[] = {
-		{_ENOENT, _CODE_ENOENT},
-		{_EACCES, _CODE_EACCES},
-		{_CMD_NOT_EXISTS, _CODE_CMD_NOT_EXISTS},
-		{_ILLEGAL_NUMBER, _CODE_ILLEGAL_NUMBER}
-	};
+int i, n_opts;
+error_t msgs[] = {
+{_ENOENT, _CODE_ENOENT},
+{_EACCES, _CODE_EACCES},
+{_CMD_NOT_EXISTS, _CODE_CMD_NOT_EXISTS},
+{_ILLEGAL_NUMBER, _CODE_ILLEGAL_NUMBER}
+};
 
-	n_options = sizeof(messages) / sizeof(messages[0]);
-	for (i = 0; i < n_options; i++)
-		if (info.error_code == messages[i].code)
-			return (messages[i].message);
+n_opts = sizeof(msgs) / sizeof(msgs[0]);
+for (i = 0; i < n_opts; i++)
+if (info.error_code == msgs[i].code)
+return (msgs[i].message);
 
-	return ("");
+return ("");
 }
 
 /**
@@ -32,32 +29,29 @@ char *message_selector(general_t info)
  *
  * @info: General information about the shell
  **/
-void error(general_t *info)
+void error(info_t *info)
 {
-	char *message;
-	char *number;
-	char *aux;
-	int size_number, size_message;
+char *msg, *num, *str;
+int num_len, msg_len;
 
-	number = NULL;
-	message = message_selector(*info);
-	number = to_string(info->n_commands);
+num = NULL;
+msg = msg_selector(*info);
+num = _itoa(info->n_commands);
 
-	size_number = _strlen(number);
-	size_message = _strlen(info->argv[0]);
+num_len = _strlen(num);
+msg_len = _strlen(info->argv[0]);
 
-	aux = malloc(size_message + size_number + 3);
+str = malloc(msg_len + num_len + 3);
+str = _strcpy(str, info->argv[0]);
+str = _strcat(str, ": ");
+str = _strcat(str, num);
 
-	aux = _strcpy(aux, info->argv[0]);
-	aux = _strcat(aux, ": ");
-	aux = _strcat(aux, number);
+msg = join_words(str, info->command, msg, ": ");
+_write_err(msg);
 
-	message = join_words(aux, info->command, message, ": ");
-	print_err(message);
-
-	free(message);
-	free(number);
-	free(aux);
+free(msg);
+free(num);
+free(str);
 }
 
 /**
@@ -66,34 +60,34 @@ void error(general_t *info)
  * @info: General information about the shell
  * @extra: Extra information
  **/
-void error_extra(general_t *info, char *extra)
+void error_extra(info_t *info, char *extra)
 {
-	char *message, *number, *aux, *aux2;
-	int size_number, size_message, size_extra;
+char *msg, *num, *str, *str2;
+int num_len, msg_len, extra_len;
 
-	number = NULL;
-	message = message_selector(*info);
-	number = to_string(info->n_commands);
+num = NULL;
+msg = msg_selector(*info);
+num = _itoa(info->n_commands);
 
-	size_number = _strlen(number);
-	size_message = _strlen(info->argv[0]);
-	size_extra = _strlen(extra);
+num_len = _strlen(num);
+msg_len = _strlen(info->argv[0]);
+extra_len = _strlen(extra);
 
-	aux = malloc(size_message + size_number + 3);
-	aux = _strcpy(aux, info->argv[0]);
-	aux = _strcat(aux, ": ");
-	aux = _strcat(aux, number);
+str = malloc(msg_len + num_len + 3);
+str = _strcpy(str, info->argv[0]);
+str = _strcat(str, ": ");
+str = _strcat(str, num);
 
-	aux2 = malloc(_strlen(message) + size_extra + 3);
-	aux2 = _strcpy(aux2, message);
-	aux2 = _strcat(aux2, ": ");
-	aux2 = _strcat(aux2, extra);
+str2 = malloc(_strlen(msg) + extra_len + 3);
+str2 = _strcpy(str2, msg);
+str2 = _strcat(str2, ": ");
+str2 = _strcat(str2, extra);
 
-	message = join_words(aux, info->command, aux2, ": ");
-	print_err(message);
+msg = join_words(str, info->command, str2, ": ");
+_write_err(msg);
 
-	free(message);
-	free(number);
-	free(aux);
-	free(aux2);
+free(msg);
+free(num);
+free(str);
+free(str2);
 }
