@@ -7,25 +7,22 @@
  */
 int _cd(char **args)
 {
+char *dir;
+
+
+
 if (args[1] == NULL)
 {
-const char *homedir;
+dir = _getenv("HOME");
+}
+else
+{
+dir = args[1];
+}
 
-homedir = getenv("HOME");
-if (chdir(homedir) != 0)
+if (chdir(dir) != 0)
 {
 perror("rktsh");
-}
-}
-else if (args[1] != NULL)
-{
-printf("%s", args[1]);
-
-if (chdir(args[1]) != 0)
-{
-perror("rktsh");
-}
-
 }
 return (1);
 }

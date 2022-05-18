@@ -17,10 +17,11 @@ fprintf(stderr, "rktsh: allocation error\n");
 exit(EXIT_FAILURE);
 }
 
-token = search_token(line, RKTSH_TOK_DELIM);
+token = _sptok(line, RKTSH_TOK_DELIM);
 
 while (token != NULL)
 {
+printf("Token no. %d : %s \n", position, token);
 tokens[position] = token;
 position++;
 
@@ -37,11 +38,12 @@ exit(EXIT_FAILURE);
 }
 }
 
-token = search_token(NULL, RKTSH_TOK_DELIM);
+token = _sptok(NULL, RKTSH_TOK_DELIM);
 
 }
 
 tokens[position] = NULL;
+
 return (tokens);
 }
 

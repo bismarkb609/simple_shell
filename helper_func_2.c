@@ -132,3 +132,20 @@ flag = 0;
 }
 return (wc);
 }
+
+void ls(char *path)
+{
+DIR *mydir;
+struct dirent *myfile;
+struct stat mystat;
+
+mydir = opendir(path);
+while ((myfile = readdir(mydir)) != NULL)
+{
+stat(myfile->d_name, &mystat);
+printf("%lld", mystat.st_size);
+printf(" %s\n", myfile->d_name);
+}
+closedir(mydir);
+}
+
