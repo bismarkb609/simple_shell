@@ -24,6 +24,7 @@ if (c == EOF)
 {
 exit(EXIT_SUCCESS);
 }
+
 else if (c == '\n')
 {
 buffer[position] = '\0';

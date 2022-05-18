@@ -1,7 +1,7 @@
 #include "rktsh.h"
 
 /**
- * errors - prints errors based on case
+ * error - prints errors based on case
  * @error: error number associated with perror statement
  * Return: void
  */
