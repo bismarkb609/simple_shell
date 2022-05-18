@@ -1,151 +1,100 @@
-#include "rktsh.h"
+#include "helper_func.h"
 
 /**
- * _atoi - converts a string to an integer
- * @s: string to be converted
- *
- * Return: the int converted from the string
+ * _itoa - Conver @number to string
+ * @n: Number to convert
+ * Return: Number as string
+ **/
+char *_itoa(int n)
+{
+int n_digits, i;
+char *_number;
+
+n_digits = digits(n);
+_number = malloc(n_digits *sizeof(char) + 2);
+if (n == 0)
+{
+_number[0] = '0';
+_number[1] = '\0';
+return (_number);
+}
+
+_number[n_digits] = '\0';
+for (i = n_digits - 1; n != 0; n /= 10, i--)
+_number[i] = (n % 10) + '0';
+
+return (_number);
+}
+
+
+/**
+ * is_num - Check if is a digit
+ * @n: Number
+ * Return: If is a number, return 1 else return 0
+ */
+int is_num(unsigned int n)
+{
+return (n >= '0' && n <= '9');
+}
+
+/**
+ * _atoi - Convert a string to a number
+ * @s: String to convert
+ * Return: Return the number
  */
 int _atoi(char *s)
 {
-int number, i, neg;
+unsigned int number, i;
+int sign;
 
-neg = 1;
-i = number = 0;
+sign = 1;
+number = 0;
+for (i = 0; s[i] != '\0'; i++)
+{
+if (is_num(s[i]))
+{
+number = (s[i] - 48)	+ number * 10;
 
-while ((s[i] < '0' || s[i] > '9') && s[i] != 0)
+if (s[i + 1] == ' ')
+break;
+}
+else if (s[i] == '-')
 {
-if (s[i] == '-')
-neg = neg * -1;
-i++;
+sign *= -1;
+}
 }
 
-while ((s[i] >= '0' && s[i] <= '9') && s[i] != 0)
-{
-if (number >= 0)
-{
-number = number * 10 - (s[i] - '0');
-i++;
-}
-else
-{
-number = number * 10 - (s[i] - '0');
-i++;
-}
-}
-neg = neg * -1;
-return (number *neg);
+return (number *sign);
 }
 
 /**
- * _strdup - returns a pointer to a newly allocated space in memory,
- * which contains a copy of the string given as a parameter.
- * @str: String to be duplicated.
- * Return: pointer to newly allocated space in memory
- * containing duplicate string.
- */
-char *_strdup(char *str)
+ * has_char - Search non-digits in a string
+ * @s: String for search
+ * Return: If a non-digits was found, return _TRUE
+ * if not, return _FALSE
+ **/
+int has_char(char *s)
 {
-char *dup;
 int i;
 
-if (str == NULL)
-return (NULL);
-
-i = 0;
-
-while (str[i])
+for (i = 0; s[i] != '\0'; i++)
 {
-i++;
+if (is_num(s[i]) == 0)
+return (1);
 }
 
-dup = malloc(sizeof(char) * (i + 1));
-if (dup == NULL)
-{
-return (NULL);
-}
-
-i = 0;
-while (str[i])
-{
-dup[i] = str[i];
-i++;
-}
-
-dup[i] = '\0';
-return (dup);
+return (0);
 }
 
 /**
- * _strcat - concatenates two strings
- * @dest: string to append to
- * @src: string to add
- *
- * Return: a pointer to the resulting string
- */
-char *_strcat(char *dest, char *src)
+ * digits - Count the number of digits of a number
+ * @n: Number
+ * Return: Digits
+ **/
+int digits(int n)
 {
-int i, j;
-
-i = 0;
-j = 0;
-
-while (dest[i] != '\0')
-i++;
-
-while (src[j] != '\0')
-{
-dest[i] = src[j];
-j++;
-i++;
+int i;
+for (i = 0; n != 0; i++, n /= 10)
+;
+return (i);
 }
-
-dest[i] = '\0';
-
-return (dest);
-}
-
-
-
-/**
- * word_count - counts words given a char delimiter
- * @str: string of words
- * Return: word count as unsigned int
- */
-unsigned int word_count(char *str)
-{
-unsigned int i, wc, flag;
-char *delims = "\n \t";
-
-for (i = 0, wc = 1, flag = 0; str[i]; i++)
-{
-if (flag == 0 &&
-(str[i] == delims[0]
-|| str[i] == delims[1]
-|| str[i] == delims[2])
-&& str[i + 1] != delims[0]
-&& str[i + 1] != delims[1]
-&& str[i + 1] != delims[2])
-flag = 1, wc++;
-else
-flag = 0;
-}
-return (wc);
-}
-
-void ls(char *path)
-{
-DIR *mydir;
-struct dirent *myfile;
-struct stat mystat;
-
-mydir = opendir(path);
-while ((myfile = readdir(mydir)) != NULL)
-{
-stat(myfile->d_name, &mystat);
-printf("%lld", mystat.st_size);
-printf(" %s\n", myfile->d_name);
-}
-closedir(mydir);
-}
-

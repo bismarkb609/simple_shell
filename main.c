@@ -1,32 +1,51 @@
-#include "rktsh.h"
+#include "main.h"
 
 /**
- * shell_loop - Loops getting input and executing it.
- */
-void shell_loop(void)
+ * main - Entry point of the shell
+ *
+ * @argc: Number of arguments received
+ * @argv: Arguments received
+ *
+ * Return: 0 on success and 1 on error
+ **/
+int main(int argc, char **argv)
 {
-char *line;
-char **args;
-int status;
+info_t *info;
+int status_code;
 
-do {
-printf(RKTSH_PROMPT);
-line = _read_line();
-args = _split_line(line);
-status = _execute(args);
+info = malloc(sizeof(info_t));
+if (info == NULL)
+{
+perror(argv[0]);
+exit(1);
+}
 
-free(line);
-free(args);
-} while (status);
+info->pid = getpid();
+info->status_code = 0;
+info->n_commands = 0;
+info->argc = argc;
+info->argv = argv;
+info->mode = isatty(STDIN) == INTERACTIVE;
+start(info);
+
+status_code = info->status_code;
+
+free(info);
+
+return (status_code);
 }
 
 
+
+
 /**
- * main - Starting function of shell
- * Return: Status code
- */
-int main(void)
+ * start - Handle the mode
+ * Description: Mode can be INTERACTIVE or NON_INTERACTIVE
+ *
+ * @info: Struct of information about the shell
+ **/
+void start(info_t *info)
 {
-shell_loop();
-return (EXIT_SUCCESS);
+	start_prompt(info);
 }
+
