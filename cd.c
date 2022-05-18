@@ -20,7 +20,7 @@ dir = args[1];
 
 if (chdir(dir) != 0)
 {
-perror("rktsh");
+error(2);
 }
 return (1);
 }

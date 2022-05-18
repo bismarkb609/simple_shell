@@ -13,7 +13,7 @@ char *token, **tokens_backup;
 
 if (!tokens)
 {
-write(STDERR_FILENO, "rktsh: allocation error\n", 25);
+error(3);
 exit(EXIT_FAILURE);
 }
 
@@ -32,11 +32,10 @@ tokens = realloc(tokens, bufsize *sizeof(char *));
 if (!tokens)
 {
 free(tokens_backup);
-write(STDERR_FILENO, "rktsh: allocation error\n", 25);
+error(3);
 exit(EXIT_FAILURE);
 }
 }
-
 token = _sptok(NULL, RKTSH_TOK_DELIM);
 }
 

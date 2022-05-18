@@ -30,14 +30,14 @@ value = _sptok(variable, "=");
 value = _sptok(NULL, "\n ");
 if (value == NULL)
 {
-write(STDERR_FILENO, ERR_PATH, _strlen(ERR_PATH));
+error(4);
 exit(EXIT_FAILURE);
 }
 path_length = _strlen(value);
 path = malloc(sizeof(char) * path_length + 1);
 if (path == NULL)
 {
-write(STDERR_FILENO, ERR_MALLOC, _strlen(ERR_MALLOC));
+error(3);
 return (NULL);
 }
 path = _strcpy(path, value);
@@ -65,7 +65,7 @@ unsigned int i;
 environ_copy = malloc(sizeof(char **) * (environ_length));
 if (environ_copy == NULL)
 {
-write(STDERR_FILENO, ERR_MALLOC, _strlen(ERR_MALLOC));
+error(3);
 return (NULL);
 }
 
@@ -78,7 +78,7 @@ variable_length = _strlen(variable);
 environ_copy[i] = malloc(sizeof(char) * variable_length + 1);
 if (environ_copy[i] == NULL)
 {
-write(STDERR_FILENO, ERR_MALLOC, _strlen(ERR_MALLOC));
+error(3);
 return (NULL);
 }
 _strcpy(environ_copy[i], environ[i]);

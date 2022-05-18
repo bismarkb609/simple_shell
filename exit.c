@@ -9,7 +9,7 @@ int _exit_(char **args)
 {
 if (args[1] != NULL)
 {
-write(STDERR_FILENO, "rktsh: expected no argument to \"CDDD\"\n", 39);
+error(4);
 }
 return (0);
 }

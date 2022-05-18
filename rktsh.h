@@ -20,10 +20,14 @@
 #define RKTSH_DICT_LEN 256
 
 /* prompt string */
-#define RKTSH_PROMPT "$ "
-#define SH_PROMPT "🚀►► "
+#define RKTSH_PROMPT "🚀►► "
 
 /* error strings */
+#define _ENOENT          "No such file or directory"
+#define _EACCES          "Permission denied"
+#define _CMD_NOT_EXISTS  "not found"
+#define _ILLEGAL_NUMBER  "Illegal number"
+
 #define ERR_MALLOC "Unable to malloc space\n"
 #define ERR_FORK "Unable to fork and create child process\n"
 #define ERR_PATH "No such file or directory\n"
@@ -35,14 +39,12 @@ int _strlen(char *s);
 int _strcmp(char *name, char *variable, unsigned int length);
 int _strncmp(char *name, char *variable, unsigned int length);
 char *_strcpy(char *dest, char *src);
-char *_itoa(long int num, int base);
-int _atoi(char *s);
 char *_strdup(char *str);
 char *_strcat(char *dest, char *src);
 unsigned int word_count(char *str);
 int _getchar(void);
 
-
+void error(int error);
 char *_read_line(void);
 char *_sptok(char *s, char *delim);
 char **_split_line(char *line);

@@ -14,7 +14,7 @@ int c;
 
 if (!buffer)
 {
-write(STDERR_FILENO, "rktsh: allocation error\n", 25);
+error(3);
 exit(EXIT_FAILURE);
 }
 while (1)
@@ -41,7 +41,7 @@ bufsize += RKTSH_RL_BUFSIZE;
 buffer = realloc(buffer, bufsize);
 if (!buffer)
 {
-write(STDERR_FILENO, "rktsh: allocation error\n", 25);
+error(3);
 exit(EXIT_FAILURE);
 }
 }

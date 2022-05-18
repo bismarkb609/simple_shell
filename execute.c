@@ -50,14 +50,14 @@ fullpath = _which(args[0], path, path);
 
 if (execve(fullpath, args, NULL) == -1)
 {
-perror("rktsh");
+error(2);
 }
 exit(EXIT_FAILURE);
 }
 else if (pid < 0)
 {
 /* Error forking */
-perror("rktsh");
+error(2);
 }
 else
 {

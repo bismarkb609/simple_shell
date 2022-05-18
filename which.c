@@ -17,7 +17,7 @@ original_path_length = _strlen(path);
 path_copy = malloc(sizeof(char) * original_path_length + 1);
 if (path_copy == NULL)
 {
-write(STDERR_FILENO, ERR_MALLOC, _strlen(ERR_MALLOC));
+error(3);
 return (NULL);
 }
 _strcpy(path_copy, path);
@@ -30,7 +30,7 @@ path_length = _strlen(token);
 fullpath = malloc(sizeof(char) * (path_length + command_length) +2);
 if (fullpath == NULL)
 {
-write(STDERR_FILENO, ERR_MALLOC, _strlen(ERR_MALLOC));
+error(3);
 return (NULL);
 }
 _strcpy(fullpath, token);
