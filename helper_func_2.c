@@ -133,7 +133,11 @@ flag = 0;
 return (wc);
 }
 
-void ls(char *path)
+/**
+ * _ls - list directory content
+ * @path: path to directory
+ */
+void _ls(char *path)
 {
 DIR *mydir;
 struct dirent *myfile;

@@ -1,7 +1,7 @@
 #include "rktsh.h"
 
 /**
- * read_line - Read a line of input from stdin.
+ * _read_line - Read a line of input from stdin.
  * Return: The line from stdin.
  */
 

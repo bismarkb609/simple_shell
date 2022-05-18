@@ -47,7 +47,7 @@ char **_split_line(char *line);
 int _execute(char **args);
 int _launch(char **args);
 
-void ls(char *path);
+void _ls(char *path);
 char *_getenv(const char *name);
 char **copy_env(char **environ_copy, unsigned int environ_length);
 void free_dp(char **array, unsigned int length);
