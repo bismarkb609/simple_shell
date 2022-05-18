@@ -1,32 +1,31 @@
-#include "rktsh.h"
+#include "holberton.h"
 
 /**
- * error - prints errors based on case
+ * errors - prints errors based on case
  * @error: error number associated with perror statement
  * Return: void
  */
-void error(int error)
+void errors(int error)
 {
-switch (error)
-{
-case 1: /* writes fork error to stderr */
-write(STDERR_FILENO, ERR_FORK, _strlen(ERR_FORK));
-perror("Error");
-break;
+	switch (error)
+	{
+	case 1: /* writes fork error to stderr */
+		write(STDERR_FILENO, ERR_FORK, _strlen(ERR_FORK));
+		perror("Error");
+		break;
 
-case 2: /* writes execve error to stderr */
-perror("Error");
-break;
+	case 2: /* writes execve error to stderr */
+		perror("Error");
+		break;
 
-case 3: /* writes malloc error to stderr */
-write(STDERR_FILENO, ERR_MALLOC, _strlen(ERR_MALLOC));
-break;
+	case 3: /* writes malloc error to stderr */
+		write(STDERR_FILENO, ERR_MALLOC, _strlen(ERR_MALLOC));
+		break;
+	case 4: /* writes empty path error to stderr */
+		write(STDERR_FILENO, ERR_PATH, _strlen(ERR_PATH));
+		break;
 
-case 4: /* writes empty path error to stderr */
-write(STDERR_FILENO, ERR_PATH, _strlen(ERR_PATH));
-break;
-
-default:
-return;
-}
+	default:
+		return;
+	}
 }
