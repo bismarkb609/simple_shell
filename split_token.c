@@ -1,48 +1,42 @@
 #include "rktsh.h"
 
 /**
- * search_token - splits a string
- * @string: string arg to split
+ * _sptok - splits a string
+ * @s: string arg to split
  * @delim: delimiter arg for separator string
- * Return: char on success, NULL on failure
+ * Return: pointer to char on success, NULL on failure
  */
-char *search_token(char *string, char *delim)
+char *_sptok(char *s, char *delim)
 {
-static char *remember;
-int string_length = 0;
+static char *rem;
+int s_length = 0;
 int i = 0;
-int search_hit = 0;
-
-remember = NULL;
+int lim_s = 0;
 
 if (delim == NULL)
 return (NULL);
-
-if ((string == NULL) && (remember == NULL))
+if ((s == NULL) && (rem == NULL))
 return (NULL);
-
-if (string == NULL)
-string = remember;
-
-string_length = strlen(string) + 1;
-for (i = 0; i < string_length; i++)
+if (s == NULL)
+s = rem;
+s_length = strlen(s) + 1;
+for (i = 0; i < s_length; i++)
 {
-if (string[i] == delim[0])
+if (s[i] == delim[0])
 {
-search_hit = 1;
+lim_s = 1;
 break;
 }
 }
-
-if (search_hit != 1)
+if (lim_s != 1)
 {
-remember = NULL;
-return (string);
+rem = NULL;
+return (s);
 }
-string[i] = '\0';
-if ((string + i + 1) != NULL)
-remember = string + i + 1;
+s[i] = '\0';
+if ((s + i + 1) != NULL)
+rem = s + i + 1;
 else
-remember = NULL;
-return (string);
+rem = NULL;
+return (s);
 }

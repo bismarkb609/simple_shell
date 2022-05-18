@@ -8,7 +8,9 @@
 #include <sys/stat.h>
 #include <sys/types.h>
 #include <sys/wait.h>
+#include <dirent.h>
 #include "builtins.h"
+
 
 
 #define RKTSH_RL_BUFSIZE 1024
@@ -23,7 +25,7 @@
 /* error strings */
 #define ERR_MALLOC "Unable to malloc space\n"
 #define ERR_FORK "Unable to fork and create child process\n"
-
+#define ERR_PATH "No such file or directory\n"
 extern char **environ;
 
 /* helper functions */
@@ -40,14 +42,14 @@ unsigned int word_count(char *str);
 
 
 char *_read_line(void);
-char *search_token(char *string, char *delim);
+char *_sptok(char *s, char *delim);
 char **_split_line(char *line);
-char **parser(char *str);
 int _execute(char **args);
 int _launch(char **args);
 
-
+void ls(char *path);
 char *_getenv(const char *name);
-char **copy_env(char **environ_cpy, unsigned int environ_len);
+char **copy_env(char **environ_copy, unsigned int environ_length);
+void free_dp(char **array, unsigned int length);
 
 #endif /* RKTSH_H */
