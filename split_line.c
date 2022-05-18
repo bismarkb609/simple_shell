@@ -21,7 +21,6 @@ token = _sptok(line, RKTSH_TOK_DELIM);
 
 while (token != NULL)
 {
-printf("Token no. %d : %s \n", position, token);
 tokens[position] = token;
 position++;
 

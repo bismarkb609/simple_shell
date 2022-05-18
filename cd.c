@@ -9,8 +9,6 @@ int _cd(char **args)
 {
 char *dir;
 
-
-
 if (args[1] == NULL)
 {
 dir = _getenv("HOME");
