@@ -24,6 +24,7 @@ return (msgs[i].message);
 return ("");
 }
 
+
 /**
  * error - Print the error
  *
@@ -54,6 +55,7 @@ free(num);
 free(str);
 }
 
+
 /**
  * error_extra - Print the error with extra information
  *
@@ -81,6 +83,44 @@ str = _strcat(str, num);
 str2 = malloc(_strlen(msg) + extra_len + 3);
 str2 = _strcpy(str2, msg);
 str2 = _strcat(str2, ": ");
+str2 = _strcat(str2, extra);
+
+msg = join_words(str, info->command, str2, ": ");
+_write_err(msg);
+
+free(msg);
+free(num);
+free(str);
+free(str2);
+}
+
+
+/**
+ * error_extra - Print the error with extra information
+ *
+ * @info: General information about the shell
+ * @extra: Extra information
+ **/
+void error_err(info_t *info, char *extra)
+{
+char *msg, *num, *str, *str2;
+int num_len, msg_len, extra_len;
+
+num = NULL;
+msg = msg_selector(*info);
+num = _itoa(info->n_commands);
+
+num_len = _strlen(num);
+msg_len = _strlen(info->argv[0]);
+extra_len = _strlen(extra);
+
+str = malloc(msg_len + num_len + 3);
+str = _strcpy(str, info->argv[0]);
+str = _strcat(str, ": ");
+str = _strcat(str, num);
+
+str2 = malloc(_strlen(msg) + extra_len + 3);
+str2 = _strcat(str2, "");
 str2 = _strcat(str2, extra);
 
 msg = join_words(str, info->command, str2, ": ");

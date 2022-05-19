@@ -41,6 +41,7 @@ typedef struct __attribute__((__packed__))
 	int status_code;          /* Last exit code */
 	char *buffer;             /* Line readed with the getline */
 	char **arguments;         /* Line splited into words */
+	char *current_dir;        /* Current directory */
 	char *environment;        /* Last environment variable get it */
 	int pid;                  /* Process id */
 } info_t;

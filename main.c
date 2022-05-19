@@ -25,6 +25,7 @@ info->status_code = 0;
 info->n_commands = 0;
 info->argc = argc;
 info->argv = argv;
+info->current_dir = "-";
 info->mode = isatty(STDIN) == INTERACTIVE;
 start(info);
 
@@ -46,6 +47,5 @@ return (status_code);
  **/
 void start(info_t *info)
 {
-	start_prompt(info);
+start_prompt(info);
 }
-
