@@ -46,7 +46,6 @@ words[new_size - 1] = NULL;
 return (words);
 }
 
-
 /**
  * join_words - Join 3 words with a separator
  * @str1: Word1 to join
@@ -94,7 +93,6 @@ str = _strcat(str, str2);
 str = _strcat(str, (char *) sep);
 str = _strcat(str, str3);
 str = _strcat(str, "\n");
-
 return (str);
 }
 
