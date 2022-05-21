@@ -1,6 +1,5 @@
 #include "io.h"
 
-
 /**
  * prompt - Print the prompt
  * @info: Struct of general information
@@ -35,7 +34,6 @@ return (NULL);
 
 return (buf);
 }
-
 
 /**
  * start_prompt - Loop reading text
@@ -86,8 +84,6 @@ free_p((void *) path);
 }
 
 }
-
-
 /**
  * sigintHandler - Handler for SIGINT
  * @sig_num: Unused parameter
