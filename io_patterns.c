@@ -14,7 +14,6 @@ args[i] = pattern_handler(info, args[i]);
 
 }
 
-
 /**
  * pattern_handler - Handles pattern
  * @s: string as pattern
@@ -33,8 +32,6 @@ s = replace_val(info, &i, s);
 
 return (s);
 }
-
-
 
 /**
  * replace_val - Replaces value
@@ -68,4 +65,3 @@ free_p(value);
 *index = i;
 return (s);
 }
-
