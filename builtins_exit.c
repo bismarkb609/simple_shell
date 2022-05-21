@@ -1,5 +1,4 @@
 #include "builtins.h"
-
 /**
  * _exit_builtin - Implementation of the exit builtin
  * Description: Free all the memory used and
@@ -27,7 +26,6 @@ free_p((void *) info);
 
 exit(status_code);
 }
-
 /**
  * num_controller - Control the argument of exit
  * @info: General information about the shell
@@ -56,4 +54,3 @@ info->status_code = _num;
 
 return (_TRUE);
 }
-
