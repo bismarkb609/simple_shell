@@ -17,7 +17,6 @@ return (_FALSE);
 return (_TRUE);
 }
 
-
 /**
  * check_builtins - Check if the actual command is a builtin_t
  * or not
@@ -47,4 +46,3 @@ return (_TRUE);
 
 return (_FALSE);
 }
-
