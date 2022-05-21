@@ -1,6 +1,4 @@
 #include "env.h"
-
-
 /**
  * _getenv_full - Get all the environment
  **/
@@ -81,7 +79,6 @@ if (path[0] == ':')
 info->is_current_path = _TRUE;
 }
 
-
 /**
  * _which - Find the directory needed
  * @filename: Command received
@@ -129,4 +126,3 @@ free(slash);
 
 return (NULL);
 }
-
